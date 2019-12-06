@@ -1,0 +1,17 @@
+# INSTALL
+
+- Last modified: fre dec 06, 2019  02:08
+- Sign: JN
+
+The C-code can be compiled using a standard C compiler.
+
+For examle (using gcc v. 7.4.0):
+
+    $ gcc -Wall -o splitfast splitfast.c
+
+Alternatively, try the provided Makefile:
+
+    $ cd /path/to/split-fasta-seqsrc/
+    $ make
+
+Complete the installation by making sure the binay is placed in your PATH.
