@@ -1,6 +1,6 @@
 # Fast Split of Fasta Sequence
 
-- Last modified: fre dec 06, 2019  02:13
+- Last modified: fre dec 06, 2019  02:21
 - Sign: Johan Nylander
 
 ### Synopis
@@ -49,7 +49,7 @@ entries to maximum length of 50, will yield the following output:
 
 ### Installation
 
-See the provided src/INSTALL document.
+See the provided [src/INSTALL](src/INSTALL) document.
 
 ### Bugs
 
@@ -59,7 +59,6 @@ of sequence length, max length, and wrap length). Hence, **check output!**
 For example:
 
     $ splitfast -m 40 -w 20 fasta.fas > err.fas
-    $ splitfast -m 40 -w 20 fasta2.fas > err.fas
 
 Empty entries can be found by:
 
