@@ -61,14 +61,16 @@ int main (int argc, char **argv) {
                 break;
         }
     }
+
     if (err) {
         fprintf(stderr, usage, argv[0]);
         exit(1);
     }
+
     if (wflag) {
         wraplength = strtol(wopt, &endptr, 10);
-
     }
+
     if (mflag) {
         maxlength = strtol(mopt, &endptr, 10);
     }
