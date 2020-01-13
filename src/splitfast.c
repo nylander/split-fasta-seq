@@ -16,8 +16,10 @@ int main (int argc, char **argv) {
 
     FILE *fp;
     char str[STR_MAX_SIZE];
+    char sstr[STR_MAX_SIZE];
     long int seqlen;
     int inheader;
+    int foundspace;
     int ngts;     // Number of greater-than-signs.
     char r;       // r is the character currently read
     int k, h;     // k is position on line,
@@ -28,6 +30,7 @@ int main (int argc, char **argv) {
     extern int optind;
     int c, err = 0;
     int mflag = 0;
+    int sflag = 0;
     int wflag = 0;
     char *mopt = NULL;
     char *wopt = NULL;
@@ -35,18 +38,21 @@ int main (int argc, char **argv) {
     long int maxlength = MAXLENGTH;
     long int wraplength = WRAPLENGTH;
 
-    static char usage[] = "Usage: %s [-h] [-m <maxlength>] [-w <wraplength>] infile(s)\n";
+    static char usage[] = "Usage: %s [-h] [-s] [-m <maxlength>] [-w <wraplength>] infile(s)\n";
 
     if (argc == 1) {
         fprintf(stderr, usage, argv[0]);
         exit(EXIT_FAILURE);
     }
 
-    while ((c = getopt(argc, argv, "hm:w:")) != -1) {
+    while ((c = getopt(argc, argv, "hsm:w:")) != -1) {
         switch (c) {
             case 'h':
                 fprintf(stderr, usage, argv[0]);
                 exit(1);
+                break;
+            case 's':
+                sflag = 1;
                 break;
             case 'm':
                 mflag = 1;
@@ -85,6 +91,7 @@ int main (int argc, char **argv) {
             }
 
             inheader = 0;
+            foundspace = 0;
             ihc = 0;
             ngts = 0;
             seqlen = 0;
@@ -94,14 +101,34 @@ int main (int argc, char **argv) {
             while ((r = getc(fp)) != EOF) {
                 if (inheader == 1) {
                     if (r == '\n') {
-                        printf("_0");
                         inheader = 0;
                         str[ihc] = '\0';
+                        sstr[ihc] = '\0';
+                        if (! sflag) {
+                            printf("_0");
+                        }
+                        putchar(r);
+                    }
+                    else if (r == ' ') {
+                        if (sflag) {
+                            if (! foundspace) {
+                                printf("_0");
+                                foundspace = 1;
+                                sstr[ihc] = '\0';
+                            }
+                        }
+                        else {
+                            putchar(r);
+                        }
                     }
                     else {
                         str[ihc] = r;
+                        sstr[ihc] = r;
+                        if (! sflag && ! foundspace) {
+                            putchar(r);
+                        }
                     }
-                    putchar(r);
+                    //putchar(r);
                     ++ihc;
                 }
                 else if (r == '>') {
@@ -130,10 +157,20 @@ int main (int argc, char **argv) {
                         }
                         if (seqlen == maxlength) {
                             if (k > 0) {
-                                printf("\n>%s_%d",str, h);
+                                if (sflag) {
+                                    printf("\n>%s_%d",sstr, h);
+                                }
+                                else {
+                                    printf("\n>%s_%d",str, h);
+                                }
                             }
                             else {
-                                printf(">%s_%d",str, h);
+                                if (sflag) {
+                                    printf(">%s_%d",sstr, h);
+                                }
+                                else {
+                                    printf(">%s_%d",str, h);
+                                }
                             }
                             putchar('\n');
                             seqlen = 0;
