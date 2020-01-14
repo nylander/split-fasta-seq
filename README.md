@@ -1,6 +1,6 @@
 # Fast Split of Fasta Sequence
 
-- Last modified: Tue Jan 14, 2020  10:47AM
+- Last modified: Tue Jan 14, 2020  11:26AM
 - Sign: Johan Nylander
 
 
@@ -15,9 +15,9 @@
 - `-s`  Use only first string (non-whitespace characters) as output header.
   Default is to use the whole fasta header.
 - `-m MAXLENGTH`  Set the maximum sequence length (MAXLENGTH) for each
-  individual entry. Default to `100000`.
+  individual entry. Default is `100000`.
 - `-w WRAPLENGTH` Set the maximum sequence length to be printed on each line
-  (WRAPLENGTH). Defaults to `80`.
+  (WRAPLENGTH). Default is `80`.
 
 
 ### Description
