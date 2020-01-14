@@ -1,6 +1,6 @@
-/*    File: splitfast.s                        */
+/*    File: splitfast.c                        */
 /*      By: Johan Nylander                     */
-/* Version: 6 dec 2019 14:10:00                */
+/* Version: Tue 14 Jan 2020                    */
 /* Compile: gcc -Wall -o splitfast splitfast.c */
 /*     Run: ./splitfast -m 30 -w 10 fasta.fas  */
 
@@ -38,7 +38,7 @@ int main (int argc, char **argv) {
     long int maxlength = MAXLENGTH;
     long int wraplength = WRAPLENGTH;
 
-    static char usage[] = "Usage: %s [-h] [-s] [-m <maxlength>] [-w <wraplength>] infile(s)\n";
+    static char usage[] = "\nSplit long fasta sequences.\n\nUsage:\n\n %s [-h] [-s] [-m <maxlength>] [-w <wraplength>] infile(s).\n\n  -h  help\n  -s  use short output header\n  -m  max sequence length (default 100,000)\n  -w  line width (default 80)\n\n  infile should be in fasta format.\n\n";
 
     if (argc == 1) {
         fprintf(stderr, usage, argv[0]);
@@ -102,6 +102,7 @@ int main (int argc, char **argv) {
                 if (inheader == 1) {
                     if (r == '\n') {
                         inheader = 0;
+                        foundspace = 0;
                         str[ihc] = '\0';
                         sstr[ihc] = '\0';
                         if (! sflag) {
@@ -118,17 +119,17 @@ int main (int argc, char **argv) {
                             }
                         }
                         else {
+                            str[ihc] = r;
                             putchar(r);
                         }
                     }
                     else {
                         str[ihc] = r;
                         sstr[ihc] = r;
-                        if (! sflag && ! foundspace) {
+                        if (! sflag || ! foundspace) {
                             putchar(r);
                         }
                     }
-                    //putchar(r);
                     ++ihc;
                 }
                 else if (r == '>') {
