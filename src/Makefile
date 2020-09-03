@@ -1,5 +1,5 @@
 # Makefile for splitfast.c
-# Tue 26 Mar 2019 09:21:21 AM CET
+# Thu 3 sep 2020 23:39:31
 # Johan.Nylander@{nrm|nbis}.se
 
 CC     = gcc
@@ -10,7 +10,11 @@ OBJ    = $(SRC:%.c=%.o)
 PROG   = splitfast
 RM     = rm -f
 
-.PHONY: all debug clean
+ifeq ($(PREFIX),)
+	PREFIX := /usr/local
+endif
+
+.PHONY: all debug clean install uninstall
 
 all: $(PROG)
 
@@ -23,6 +27,12 @@ debug: CFLAGS += -g
 
 debug: $(PROG)
 	$(GDB) ./$(PROG)
+
+install: $(PROG)
+	install $(PROG) $(DESTDIR)$(PREFIX)/bin
+
+uninstall:
+	rm $(DESTDIR)$(PREFIX)/bin/$(PROG)
 
 clean:
 	@ $(RM) $(OBJ) $(PROG)
