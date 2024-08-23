@@ -1,12 +1,12 @@
 # INSTALL
 
-- Last modified: tor sep 03, 2020  11:42
+- Last modified: fre aug 23, 2024  12:49
 - Sign: JN
 
 The C-code can be compiled using a standard C compiler
 and installed utilizing the make system.
 
-For examle
+For example
 
     $ cd /path/to/split-fasta-seq/src/
     $ make
