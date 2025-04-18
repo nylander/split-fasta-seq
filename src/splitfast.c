@@ -101,7 +101,8 @@ int main(int argc, char **argv) {
                     if (seq_len > 0) {
                         if (sflag) {
                             printf(">%s__%d\n", header, part_num++);
-                        } else {
+                        }
+                        else {
                             printf(">%s__%d\n", header, part_num++);
                         }
                         print_wrapped_sequence(sequence_chunk, seq_len, wraplength);
@@ -113,7 +114,8 @@ int main(int argc, char **argv) {
                     if (sflag) {
                         extract_first_string(header);
                     }
-                } else {
+                }
+                else {
                     fprintf(stderr, "Error: Failed to read header line.\n");
                     fclose(fp);
                     free(sequence_chunk);
@@ -123,13 +125,15 @@ int main(int argc, char **argv) {
                 seq_len = 0;
                 part_num = 0;
                 in_sequence = 1;
-            } else if (current_char != '\n') {
+            }
+            else if (current_char != '\n') {
                 sequence_chunk[seq_len++] = current_char;
 
                 if (seq_len == maxlength) {
                     if (sflag) {
                         printf(">%s__%d\n", header, part_num++);
-                    } else {
+                    }
+                    else {
                         printf(">%s__%d\n", header, part_num++);
                     }
                     print_wrapped_sequence(sequence_chunk, seq_len, wraplength);
@@ -141,7 +145,8 @@ int main(int argc, char **argv) {
         if (in_sequence && seq_len > 0) {
             if (sflag) {
                 printf(">%s__%d\n", header, part_num++);
-            } else {
+            }
+            else {
                 printf(">%s__%d\n", header, part_num++);
             }
             print_wrapped_sequence(sequence_chunk, seq_len, wraplength);
