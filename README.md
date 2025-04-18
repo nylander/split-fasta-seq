@@ -1,10 +1,10 @@
 # Fast Split of Fasta Sequences
 
-### Synopsis
+## Synopsis
 
     $ splitfast [-h] [-v] [-s] [-m <maxlength>] [-w <wraplength>] infile(s).
 
-### Description
+## Description
 
 Split long fasta entries to shorter.
 
@@ -13,7 +13,7 @@ a new fasta entry is created. Headers are reused and relabeled with an added
 integer suffix. For example, if original header is `>label`, then the new
 sequence parts will receive labels `>label__0`, and `>label__1`, etc.
 
-### Options
+## Options
 
 - `-h` --- help
 - `-v` --- print version
@@ -23,7 +23,7 @@ sequence parts will receive labels `>label__0`, and `>label__1`, etc.
 
 `infile`(s) should be in fasta format.
 
-### Examples
+## Examples
 
 The example file `data/fasta.fas` has two sequences, each of length 160
 positions, and with labels `Apa` and `Bpa`. Splitting these fasta entries to
@@ -62,14 +62,14 @@ display the output headers by filtering using `grep`):
     >2234__1
     >2234__2
 
-### Installation
+## Installation
 
 See the provided [INSTALL](INSTALL) document.
 
-### Copyright and License
+## Copyright and License
 
 Copyright Johan Nylander 2018-2025. [MIT License](LICENSE)
 
-### Download
+## Download
 
 <https://github.com/nylander/split-fasta-seq>
