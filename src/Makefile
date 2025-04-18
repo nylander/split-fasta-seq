@@ -1,10 +1,8 @@
 # Makefile for splitfast.c
-# Thu 3 sep 2020 23:39:31
-# Johan.Nylander@{nrm|nbis}.se
 
 CC     = gcc
 GDB    = gdb
-CFLAGS = -Wall -O3
+CFLAGS = -Wall -O2
 SRC    = splitfast.c
 OBJ    = $(SRC:%.c=%.o)
 PROG   = splitfast
@@ -18,7 +16,8 @@ endif
 
 all: $(PROG)
 
-$(OBJ): $(SRC)
+$(OBJ): $(SRC) splitfast.h
+	$(CC) $(CFLAGS) -c -o $@ $<
 
 $(PROG): $(OBJ)
 	$(CC) $(CFLAGS) -o $@ $(OBJ)
@@ -33,6 +32,10 @@ install: $(PROG)
 
 uninstall:
 	rm $(DESTDIR)$(PREFIX)/bin/$(PROG)
+
+test:
+	./$(PROG) -m 40 -w 20 ../data/fasta.fas
+	./$(PROG) -s ../data/longer.fas | grep '>'
 
 clean:
 	@ $(RM) $(OBJ) $(PROG)

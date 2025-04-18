@@ -1,6 +1,6 @@
 # INSTALL
 
-- Last modified: fre aug 23, 2024  12:49
+- Last modified: fre apr 18, 2025  02:30
 - Sign: JN
 
 The C-code can be compiled using a standard C compiler
@@ -12,3 +12,10 @@ For example
     $ make
     $ sudo make install
 
+Or, if you have cmake:
+
+    $ mkdir build
+    $ cd build
+    $ cmake ..
+    $ make
+    $ sudo make install
