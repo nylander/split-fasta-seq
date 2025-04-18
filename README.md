@@ -64,7 +64,7 @@ display the output headers by filtering using `grep`):
 
 ### Installation
 
-See the provided [INSTALL](src/INSTALL) document.
+See the provided [INSTALL](INSTALL) document.
 
 ### Copyright and License
 
